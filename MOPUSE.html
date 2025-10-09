@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Logo Intro — Stronger Background Blur</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --bg:#0b0f17; --fg:#e7ebf3; --muted:#aab2c5; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 50% -10%, #1c2440 0%, var(--bg) 60%);
+      color: var(--fg);
+    }
+
+    /* ----- Demo page content (not required) ----- */
+    header {
+      position: sticky; top: 0;
+      backdrop-filter: blur(8px);
+      background: rgba(15,20,34,.35);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      padding: 14px 20px;
+    }
+    main { max-width: 1100px; margin: 40px auto; padding: 0 20px 80px; }
+    .hero {
+      display: grid; place-items: center;
+      min-height: 55vh; text-align: center;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      box-shadow: 0 20px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+      overflow: hidden;
+    }
+    .hero h1 { font-size: clamp(28px, 5vw, 56px); margin: 0 0 8px; letter-spacing: .4px; }
+    .hero p  { margin: 0; color: var(--muted); }
+    .grid {
+      margin-top: 40px;
+      display: grid; gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .card {
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      box-shadow: 0 8px 30px rgba(0,0,0,.25);
+    }
+
+    /* ===== Intro Overlay (stronger blur) ===== */
+    .intro {
+      position: fixed; inset: 0; z-index: 9999;
+      /* darker veil + stronger backdrop blur */
+      background: radial-gradient(80% 60% at 50% 40%, rgba(8,10,16,.55), rgba(6,8,12,.7));
+      backdrop-filter: blur(14px) saturate(1.05);
+      -webkit-backdrop-filter: blur(14px) saturate(1.05);
+      display: grid; place-items: center;
+      pointer-events: none;
+    }
+    .intro__center { display: grid; place-items: center; }
+
+    .intro__logo {
+      width: clamp(200px, 32vw, 460px); /* bigger */
+      user-select: none; -webkit-user-drag: none;
+      animation-name: logoIntroSmooth;
+      animation-duration: 2.4s;
+      animation-fill-mode: forwards;
+      animation-timing-function: linear;
+      will-change: transform, opacity, filter;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      contain: layout paint;
+      image-rendering: auto;
+      filter: drop-shadow(0 12px 26px rgba(0,0,0,.5));
+    }
+
+    /* Smooth zoom + blur */
+    @keyframes logoIntroSmooth {
+      0% {
+        opacity: 0;
+        transform: translateZ(0) scale(0.84);
+        filter: blur(20px);
+        animation-timing-function: cubic-bezier(.15,.85,.35,1);
+      }
+      32% {
+        opacity: 1;
+        transform: translateZ(0) scale(1.02);
+        filter: blur(0px);
+        animation-timing-function: cubic-bezier(.25,.6,.2,1);
+      }
+      70% {
+        opacity: 1;
+        transform: translateZ(0) scale(1.05);
+        filter: blur(0px);
+        animation-timing-function: cubic-bezier(.4,0,.2,1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateZ(0) scale(1.20);
+        filter: blur(18px);
+      }
+    }
+
+    /* Fade container for teardown */
+    .intro--hide { opacity: 0; transition: opacity .45s ease; }
+
+    /* Extra: blur the whole page while intro is active */
+    #page { transition: filter .5s ease; }
+    html.intro-active #page { filter: blur(8px) saturate(1.05); }
+
+    /* Prevent scroll jump */
+    html.intro-active, body.intro-active { overflow: hidden; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .intro { display: none; }
+      .intro__logo { animation: none; opacity: 1; filter: none; }
+      html.intro-active #page { filter: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="siteIntro" class="intro" aria-hidden="true">
+    <div class="intro__center">
+      <img class="intro__logo" src="assets/logo.png" alt="CAPT — Captivate Studio">
+    </div>
+  </div>
+
+  <div id="page">
+    <header>Logo Intro • stronger background blur</header>
+    <main>
+      <section class="hero">
+        <div>
+          <h1>Content after the intro</h1>
+          <p>Background blur is much stronger now (overlay + page blur).</p>
+        </div>
+      </section>
+      <div class="grid">
+        <div class="card"><strong>Card A</strong><br/>Demo content</div>
+        <div class="card"><strong>Card B</strong><br/>Demo content</div>
+        <div class="card"><strong>Card C</strong><br/>Demo content</div>
+        <div class="card"><strong>Card D</strong><br/>Demo content</div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const intro = document.getElementById('siteIntro');
+      if (!intro) return;
+
+      document.documentElement.classList.add('intro-active');
+      document.body.classList.add('intro-active');
+
+      const logo = intro.querySelector('.intro__logo');
+      const FALLBACK_REMOVE_MS = 2800;
+
+      function teardown() {
+        if (!intro || intro.classList.contains('intro--hide')) return;
+        intro.classList.add('intro--hide');
+        document.documentElement.classList.remove('intro-active');
+        document.body.classList.remove('intro-active');
+        setTimeout(() => intro.remove(), 460);
+      }
+
+      if (logo) logo.addEventListener('animationend', teardown, { once: true });
+      setTimeout(teardown, FALLBACK_REMOVE_MS);
+    })();
+  </script>
+</body>
+</html>

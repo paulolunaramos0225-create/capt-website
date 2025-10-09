@@ -1,0 +1,10 @@
+{
+  "title": "UGC Campaigns",
+  "categories": ["All", "Product", "Lifestyle", "Testimonial"],
+  "items": [
+    {
+      "id": "ugc-001", "title": "Skincare Product Testimonial", "cat": "Testimonial", "thumb": "assets/thumbs/fallback.webp",
+      "drive": "https://drive.google.com/file/d/your_video_id_7/view?usp=sharing"
+    }
+  ]
+}

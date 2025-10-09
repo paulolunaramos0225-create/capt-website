@@ -1,0 +1,14 @@
+{
+  "title": "Graphic Design",
+  "categories": ["All", "Branding", "Social", "Decks", "Print"],
+  "items": [
+    {
+      "id": "gd-001", "title": "Startup Logo & Brand Kit", "cat": "Branding", "thumb": "assets/thumbs/fallback.webp",
+      "drive": "https://drive.google.com/file/d/your_file_id_1/view?usp=sharing"
+    },
+    {
+      "id": "gd-002", "title": "Social Media Template Pack", "cat": "Social", "thumb": "assets/thumbs/fallback.webp",
+      "drive": "https://drive.google.com/file/d/your_file_id_2/view?usp=sharing"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# Secret credentials
+google-credentials.json
+
+# Node.js dependencies
+node_modules/

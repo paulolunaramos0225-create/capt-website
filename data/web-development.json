@@ -1,0 +1,10 @@
+{
+  "title": "Web Development",
+  "categories": ["All", "Landing", "Multi-page", "E-commerce"],
+  "items": [
+    {
+      "id": "wd-001", "title": "SaaS Landing Page", "cat": "Landing", "thumb": "assets/thumbs/fallback.webp",
+      "drive": "https://yoursite.com/example"
+    }
+  ]
+}

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CAPT</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="icon" href="assets/favicon.png?v=1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.png?v=1">
+
+</head>
+
+
+<body>
+
+  <div id="siteIntro" class="intro" aria-hidden="true">
+  <div class="intro__center">
+    <img class="intro__logo" src="assets/logo.png" alt="CAPT — Captivate Studio">
+  </div>
+</div>
+
+<div class="container">
+  <div id="page">
+  
+    <header class="head-nav-container">
+      <div class="site-header py-lg-3 px-lg-4 py-md-1 px-lg-1" data-lgdown-class="glassy">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <div class="container-fluid">
+
+            <a class="navbar-brand" href="#home">
+              <img src="assets/logo.png" alt="CAPT Logo" class="logo">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse mobile-nav-sheet" id="mainNav">
+              <ul class="navbar-nav glass-nav gap-3 px-4 py-3 mx-md-auto my-2 my-md-0" >
+                <li class="nav-item"><a class="nav-link nav-btn" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link nav-btn" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link nav-btn" href="#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link nav-btn" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link nav-btn" href="#team">Team</a></li>
+                <li class="nav-item"><a class="nav-link nav-btn" href="#contacts">Contacts</a></li>
+              </ul>
+
+              <div class="d-none d-lg-block ms-lg-2">
+              <button class="btn btn-warning rounded-pill px-4 fw-bold"
+              data-bs-toggle="modal" data-bs-target="#contactModal">Get Started
+              </button>
+            </div>
+
+              <div class="mt-md-3 mt-lg-0 d-lg-none mobile-cta">
+                <button class="btn btn-warning rounded-pill px-4 fw-bold w-100"
+                data-bs-toggle="modal" data-bs-target="#contactModal">Get Started</button>
+              </div>  
+
+            </div>
+
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <section id="home" class="vh-section d-flex flex-column align-items-stretch content-container section-1">
+      <button class="btn btn-warning rounded-pill px-4 fw-bold section1-cta" data-bs-toggle="modal" data-bs-target="#contactModal">Get Started</button>
+    </section>
+
+    <section id="about" class="section-2">
+      <div class="left-panel-2">
+        <img src="assets/capti2.png" alt="About image" class="about-img animate">
+      </div>
+
+      <div class="right-panel-2">
+        <div class="about-content animate">
+          <h1 class="about-title" style="text-transform: capitalize !important;">About Us</h1>
+          <p class="about-text">
+            CAPT (Captivate) is a creative studio specializing in video editing, graphic design, social media marketing, and web design. Founded in 2020, we have evolved from a small freelance initiative into a dedicated team serving both local businesses and international brands.
+          </p>
+          <p class="about-text">
+            Our approach goes beyond aesthetics — we craft compelling narratives, design purposeful visuals, and develop strategies that drive measurable growth. By combining creativity with technical expertise, we help our clients strengthen their digital presence and connect authentically with their audiences.
+          </p>
+          <p class="about-text">
+            Over the years, CAPT has partnered with organizations across industries, delivering content and campaigns that inspire, engage, and convert. Our mission is to captivate attention, elevate brands, and deliver results that matter.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section-3">
+    <div class="services-wrapper">
+      <div class="container-xxl">
+        <header class="text-center services-heading pt-4 pb-5 mb-3 serbis animate">
+          <h1 class="fw-bold mb-2 service-text">Our Services</h1>
+          <p class="lead-muted mb-0">
+            Helping you grow through creative content, smart design, and technical expertise.
+          </p>
+        </header>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 g-lg-5 services-track">
+
+          <div class="col services-slide animate dir-right">
+            <article class="service-card glass h-100 p-4 p-lg-5">
+              <div class="service-media mb-3 d-lg-none">
+                <img class="rounded" src="assets/VIDEO EDITS.png" alt="Video Editing">
+              </div>
+              <div class="service-header">
+                <div class="icon-badge"><img src="assets/video-icon.png" class="img-fluid p-2 service-icon" alt=""></div>
+                <h5 class="service-title">Video Editing</h5>
+              </div>
+              <p class="service-body">
+                Story-driven edits tailored for web and social. Hooks, pacing, subtitles, color and sound design,
+                plus platform-native formats to maximize retention.
+              </p>
+            </article>
+          </div>
+
+          <div class="col services-slide animate dir-right">
+            <article class="service-card glass h-100 p-4 p-lg-5">
+              <div class="service-media mb-3 d-lg-none">
+                <img class="rounded" src="assets/GRAPHICS.png" alt="Graphic Design">
+              </div>
+              <div class="service-header">
+                <div class="icon-badge"><img src="assets/paint-icon.png" class="img-fluid p-2 service-icon" alt=""></div>
+                <h5 class="service-title">Graphic Design</h5>
+              </div>
+              <p class="service-body">
+                Visual systems that scale—logos, brand kits, social templates, pitch decks, and campaign assets
+                for both print and digital, built for consistency and clarity.
+              </p>
+            </article>
+          </div>
+
+          <div class="col services-slide animate dir-right">
+            <article class="service-card glass h-100 p-4 p-lg-5">
+              <div class="service-media mb-3 d-lg-none">
+                <img class="rounded" src="assets/FACEBOOK ADS.png" alt="Facebook Ads">
+              </div>
+              <div class="service-header">
+                <div class="icon-badge"><img src="assets/fbads-icon.png" class="img-fluid p-2 service-icon" alt=""></div>
+                <h5 class="service-title">Facebook Ads</h5>
+              </div>
+              <p class="service-body">
+                Full-funnel campaigns with creative testing, precise targeting, pixel/UTM setup,
+                and reporting focused on conversions and ROAS.
+              </p>
+            </article>
+          </div>
+
+          <div class="col services-slide animate dir-left">
+            <article class="service-card glass h-100 p-4 p-lg-5">
+              <div class="service-media mb-3 d-lg-none">
+                <img class="rounded" src="assets/UGC CONTENTS.png" alt="UGC Contents">
+              </div>
+              <div class="service-header">
+                <div class="icon-badge"><img src="assets/ugc-icon.png" class="img-fluid p-2 service-icon" alt=""></div>
+                <h5 class="service-title">UGC Contents</h5>
+              </div>
+              <p class="service-body">
+                Authentic, creator-led videos that feel native to the feed. We handle sourcing, briefs, scripts,
+                and edits optimized for vertical viewing.
+              </p>
+            </article>
+          </div>
+
+          <div class="col services-slide animate dir-left">
+            <article class="service-card glass h-100 p-4 p-lg-5">
+              <div class="service-media mb-3 d-lg-none">
+                <img class="rounded" src="assets/WEB DEV.png" alt="Web Development">
+              </div>
+              <div class="service-header">
+                <div class="icon-badge"><img src="assets/webdev-icon.png" class="img-fluid p-2 service-icon" alt=""></div>
+                <h5 class="service-title">Web Development</h5>
+              </div>
+              <p class="service-body">
+                Fast, responsive sites with clean UX, SEO-friendly structure, analytics, and simple content
+                management—built for performance and scale.
+              </p>
+            </article>
+          </div>
+
+          <div class="col services-slide animate dir-left">
+            <article class="service-card glass h-100 p-4 p-lg-5">
+              <div class="service-media mb-3 d-lg-none">
+                <img class="rounded" src="assets/GAME DEV.png" alt="Game Development">
+              </div>
+              <div class="service-header">
+                <div class="icon-badge"><img src="assets/gamedev-icon.png" class="img-fluid p-2 service-icon" alt=""></div>
+                <h5 class="service-title">Game Development</h5>
+              </div>
+              <p class="service-body">
+                From prototype to launch—core loops, UI/UX, assets, polish, and publishing support
+                for engaging player experiences.
+              </p>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section id="projects" class="section-4 projects-carousel vignette-blur">
+      <header class="pc-head animate">
+        <h2 class="pc-title mt-4">Our Projects</h2>
+        <p class="pc-sub pb-5 mb-3">
+          A selection of work across editing, design, ads, UGC, web, and games.
+          Click a card to open the Google Drive link.
+        </p>
+      </header>
+
+      <input class="pc-radio" type="radio" name="pc" id="pc-1" checked>
+      <input class="pc-radio" type="radio" name="pc" id="pc-2">
+      <input class="pc-radio" type="radio" name="pc" id="pc-3">
+      <input class="pc-radio" type="radio" name="pc" id="pc-4">
+      <input class="pc-radio" type="radio" name="pc" id="pc-5">
+      <input class="pc-radio" type="radio" name="pc" id="pc-6">
+
+      <div class="pc-stage p-2 animate">
+        <a class="pc-card pc-card-1 glass" href="javascript:void(0)" onclick="openProjectsModal('video-editing')" target="_self" rel="nofollow">
+          <img src="assets/video-edit.webp" alt="Project 1">
+          <div class="mcap">
+            <strong>Video Editing</strong>
+            <em>Story-driven edits for web/social.</em>
+          </div>
+        </a>
+        <a class="pc-card pc-card-2 glass" href="javascript:void(0)" onclick="openProjectsModal('graphic-design')" target="_self" rel="nofollow">
+          <img src="assets/grapicd.webp" alt="Project 2">
+          <div class="mcap">
+            <strong>Graphic Design</strong>
+            <em>Logos, brand kits, and campaigns.</em>
+          </div>
+        </a>
+        <a class="pc-card pc-card-3 glass" href="javascript:void(0)" onclick="openProjectsModal('facebook-ads')" target="_self" rel="nofollow">
+          <img src="assets/fb-adsf.webp" alt="Project 3">
+          <div class="mcap">
+            <strong>Facebook Ads</strong>
+            <em>Full-funnel creative with tracking.</em>
+          </div>
+        </a>
+        <a class="pc-card pc-card-4 glass" href="javascript:void(0)" onclick="openProjectsModal('ugc')" target="_self" rel="nofollow">
+          <img src="assets/ugc-adsf.webp" alt="Project 4">
+          <div class="mcap">
+            <strong>UGC Campaigns</strong>
+            <em>Creator-led videos native to feed.</em>
+          </div>
+        </a>
+      <a class="pc-card pc-card-5 glass" href="javascript:void(0)" onclick="openProjectsModal('web-development')" target="_self" rel="nofollow">
+          <img src="assets/webdev.webp" alt="Project 5">
+          <div class="mcap">
+            <strong>Web Development</strong>
+            <em>Fast UX with clean IA & analytics.</em>
+          </div>
+        </a>
+        <a class="pc-card pc-card-6 glass" href="javascript:void(0)" onclick="openProjectsModal('game-development')" target="_self" rel="nofollow">
+          <img src="assets/game-d.webp" alt="Project 6">
+          <div class="mcap">
+            <strong>Game Development</strong>
+            <em>Polished gameplay and publishing.</em>
+          </div>
+        </a>
+
+        <div class="pc-arrows">
+          <label class="pc-prev s1" for="pc-6"></label><label class="pc-next s1" for="pc-2"></label>
+          <label class="pc-prev s2" for="pc-1"></label><label class="pc-next s2" for="pc-3"></label>
+          <label class="pc-prev s3" for="pc-2"></label><label class="pc-next s3" for="pc-4"></label>
+          <label class="pc-prev s4" for="pc-3"></label><label class="pc-next s4" for="pc-5"></label>
+          <label class="pc-prev s5" for="pc-4"></label><label class="pc-next s5" for="pc-6"></label>
+          <label class="pc-prev s6" for="pc-5"></label><label class="pc-next s6" for="pc-1"></label>
+        </div>
+      </div>
+
+      <div class="pc-caption animate">
+        <div class="pc-cap pc-cap-1">
+          <h3>Video Editing</h3>
+          <p>Hooks, pacing, subtitles, color/sound, and platform-native formats.</p>
+        </div>
+        <div class="pc-cap pc-cap-2">
+          <h3>Graphic Design</h3>
+          <p>Brand systems, logos, decks, and campaign assets for print & digital.</p>
+        </div>
+        <div class="pc-cap pc-cap-3">
+          <h3>Facebook Ads</h3>
+          <p>Creative testing, audiences, pixel/UTMs, and ROAS-focused reporting.</p>
+        </div>
+        <div class="pc-cap pc-cap-4">
+          <h3>UGC Campaigns</h3>
+          <p>Creator-led content that feels native to the feed and converts.</p>
+        </div>
+        <div class="pc-cap pc-cap-5">
+          <h3>Web Development</h3>
+          <p>Responsive, fast, SEO-friendly sites with clean UX and analytics.</p>
+        </div>
+        <div class="pc-cap pc-cap-6">
+          <h3>Game Development</h3>
+          <p>From prototype to launch—loops, polish, and publishing support.</p>
+        </div>
+      </div>
+
+      <div class="pc-dots mb-5 pb-5 animate">
+        <label for="pc-1"></label>
+        <label for="pc-2"></label>
+        <label for="pc-3"></label>
+        <label for="pc-4"></label>
+        <label for="pc-5"></label>
+        <label for="pc-6"></label>
+      </div>
+    </section>
+
+    <section id="team" class="section-5">
+      <div class="team-wrapper">
+        <div class="container py-0">
+          <div class="team-header text-center mb-4 animate">
+            <h2 class="team-title-hero m-0 pb-3">Our Team</h2>
+            <span class="kicker-badge">Meet the people behind CAPT</span>
+            <p class="team-subtitle pb-5">A multidisciplinary crew shipping clean, on-brand work.</p>
+          </div>
+
+          <div class="team-toggle-buttons text-center mb-4 mb-lg-5 animate" id="teamToggle">
+            <button class="btn btn-toggle active" data-team="cofounders">Co-Founders</button>
+            <button class="btn btn-toggle" data-team="coreteam">Core Team</button>
+          </div>
+
+          <div class="team-rail d-none d-lg-flex animate" role="list">
+            <div class="member" role="listitem">
+              <figure class="member-card" tabindex="0" aria-label="Mark De Leon">
+                <img class="member-photo" src="assets/DELEON.png" alt="Mark De Leon" draggable="false">
+                <figcaption class="member-meta">
+                  <div class="name">Mark De Leon</div>
+                </figcaption>
+                <div class="member-spotlight">
+                  <div class="spot-name">Mark De Leon</div>
+                </div>
+                <div class="member-contacts">
+                  <a href="#" class="soc" aria-label="Facebook"><img src="assets/icon1.png" alt=""></a>
+                  <a href="#" class="soc" aria-label="Instagram"><img src="assets/icon2.png" alt=""></a>
+                  <a href="#" class="soc" aria-label="WhatsApp"><img src="assets/icon3.png" alt=""></a>
+                </div>
+              </figure>
+            </div>
+
+            <div class="member" role="listitem">
+              <figure class="member-card" tabindex="0" aria-label="Paulo Ramos">
+                <img class="member-photo" src="assets/RAMOS.png" alt="Paulo Ramos" draggable="false">
+                <figcaption class="member-meta">
+                  <div class="name">Paulo Ramos</div>
+                </figcaption>
+                <div class="member-spotlight">
+                  <div class="spot-name">Paulo Ramos</div>
+                </div>
+                <div class="member-contacts">
+                  <a href="#" class="soc" aria-label="Facebook"><img src="assets/icon1.png" alt=""></a>
+                  <a href="#" class="soc" aria-label="Instagram"><img src="assets/icon2.png" alt=""></a>
+                  <a href="#" class="soc" aria-label="WhatsApp"><img src="assets/icon3.png" alt=""></a>
+                </div>
+              </figure>
+            </div>
+
+            <div class="member" role="listitem">
+              <figure class="member-card" tabindex="0" aria-label="Christian Diaz">
+                <img class="member-photo" src="assets/DIAZ.png" alt="Christian Diaz" draggable="false">
+                <figcaption class="member-meta">
+                  <div class="name">Christian Diaz</div>
+                </figcaption>
+                <div class="member-spotlight">
+                  <div class="spot-name">Christian Diaz</div>
+                </div>
+                <div class="member-contacts">
+                  <a href="#" class="soc" aria-label="Facebook"><img src="assets/icon1.png" alt=""></a>
+                  <a href="#" class="soc" aria-label="Instagram"><img src="assets/icon2.png" alt=""></a>
+                  <a href="#" class="soc" aria-label="WhatsApp"><img src="assets/icon3.png" alt=""></a>
+                </div>
+              </figure>
+            </div>
+
+            <div class="member" role="listitem">
+              <figure class="member-card" tabindex="0" aria-label="Jeric Lauresta">
+                <img class="member-photo" src="assets/LAURESTA.png" alt="Jeric Lauresta" draggable="false">
+                <figcaption class="member-meta">
+                  <div class="name">Jeric Lauresta</div>
+                </figcaption>
+                <div class="member-spotlight">
+                  <div class="spot-name">Jeric Lauresta</div>
+                </div>
+                <div class="member-contacts">
+                  <a href="#" class="soc" aria-label="Facebook"><img src="assets/icon1.png" alt=""></a>
+                  <a href="#" class="soc" aria-label="Instagram"><img src="assets/icon2.png" alt=""></a>
+                  <a href="#" class="soc" aria-label="WhatsApp"><img src="assets/icon3.png" alt=""></a>
+                </div>
+              </figure>
+            </div>
+
+            <div class="member" role="listitem">
+              <figure class="member-card" tabindex="0" aria-label="Ivan Tuazon">
+                <img class="member-photo" src="assets/TUAZON.png" alt="Ivan Tuazon" draggable="false">
+                <figcaption class="member-meta">
+                  <div class="name">Ivan Tuazon</div>
+                </figcaption>
+                <div class="member-spotlight">
+                  <div class="spot-name">Ivan Tuazon</div>
+                </div>
+                <div class="member-contacts">
+                  <a href="#" class="soc" aria-label="Facebook"><img src="assets/icon1.png" alt=""></a>
+                  <a href="#" class="soc" aria-label="Instagram"><img src="assets/icon2.png" alt=""></a>
+                  <a href="#" class="soc" aria-label="WhatsApp"><img src="assets/icon3.png" alt=""></a>
+                </div>
+              </figure>
+            </div>
+          </div>
+
+          <div id="teamCarousel" class="team-carousel carousel slide d-lg-none"
+              data-bs-ride="false" data-bs-touch="true" data-bs-interval="false">
+            <div class="carousel-inner overflow-hidden">
+              <div class="carousel-item active">
+                <div class="slide-wrap">
+                  <div class="media-34">
+                    <img class="media-34-img" src="assets/DELEON.png" alt="Mark De Leon" draggable="false">
+                    <div class="media-34-meta">
+                      <div class="name">Mark De Leon</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="slide-wrap">
+                  <div class="media-34">
+                    <img class="media-34-img" src="assets/RAMOS.png" alt="Paulo Ramos" draggable="false">
+                    <div class="media-34-meta">
+                      <div class="name">Paulo Ramos</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="slide-wrap">
+                  <div class="media-34">
+                    <img class="media-34-img" src="assets/DIAZ.png" alt="Christian Diaz" draggable="false">
+                    <div class="media-34-meta">
+                      <div class="name">Christian Diaz</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="slide-wrap">
+                  <div class="media-34">
+                    <img class="media-34-img" src="assets/LAURESTA.png" alt="Jeric Lauresta" draggable="false">
+                    <div class="media-34-meta">
+                      <div class="name">Jeric Lauresta</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="slide-wrap">
+                  <div class="media-34">
+                    <img class="media-34-img" src="assets/TUAZON.png" alt="Ivan Tuazon" draggable="false">
+                    <div class="media-34-meta">
+                      <div class="name">Ivan Tuazon</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="carousel-control-prev team-control" type="button"
+                    data-bs-target="#teamCarousel" data-bs-slide="prev" aria-label="Previous">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next team-control" type="button"
+                    data-bs-target="#teamCarousel" data-bs-slide="next" aria-label="Next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="contacts" class="section-6 contacts">
+    <div class="container-xxl kontaks">
+      <div class="contacts-panel">
+        <div class="row g-4 g-lg-5 align-items-start">
+          <div class="col-12 col-lg-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="assets/logo.png" class="contacts-logo" alt="CAPT logo">
+              </div>
+
+            <a href="#contact-form" class="btn btn-outline-light rounded-pill px-4 fw-semibold contacts-cta" 
+            data-bs-toggle="modal" data-bs-target="#contactModal">Send Us Message</a>
+
+            <div class="d-flex gap-3 mt-4 contacts-socials">
+              <a href="#" class="soc" aria-label="TikTok">
+                <img class="soc-img" src="assets/icon4.png" alt="">
+              </a>
+              <a href="#" class="soc" aria-label="X">
+                <img class="soc-img" src="assets/icon5.png" alt="">
+              </a>
+              <a href="#" class="soc" aria-label="Facebook">
+                <img class="soc-img" src="assets/icon1.png" alt="">
+              </a>
+              <a href="#" class="soc" aria-label="Instagram">
+                <img class="soc-img" src="assets/icon2.png" alt="">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-6 col-lg-2">
+            <h6 class="contacts-heading">Home</h6>
+            <ul class="contacts-list">
+              <li><a href="#services">Our Services</a></li>
+              <li><a href="#about">About CAPT</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#team">Team</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-lg-3">
+            <h6 class="contacts-heading">About</h6>
+            <ul class="contacts-list">
+              <li><a href="#about">What is CAPT?</a></li>
+              <li><a href="#about">Our Story</a></li>
+              <li><a href="#team">What Makes Us Different</a></li>
+              <li><a href="#contacts">Work With Us</a></li>
+            </ul>
+          </div>
+
+          <div class="col-12 col-lg-3">
+            <h6 class="contacts-heading">Our Projects</h6>
+            <ul class="contacts-list">
+              <li><a href="#projects">Glimpse of Projects</a></li>
+              <li><a href="#projects">Portfolio</a></li>
+              <li><a href="#projects">Partners &amp; Collabs</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="contacts-foot d-flex flex-column flex-md-row justify-content-between align-items-center pt-3 mt-3 border-top border-light-subtle">
+          <small class="opacity-75 mb-2 mb-md-0">© 2025 CAPT — All rights reserved.</small>
+          <div class="d-flex gap-3">
+            <a href="#" class="foot-link">Privacy</a>
+            <a href="#" class="foot-link">Terms</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+  
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute; overflow:hidden">
+      <defs>
+        <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise"/>
+          <feGaussianBlur in="noise" stdDeviation="2" result="blurred"/>
+          <feDisplacementMap in="SourceGraphic" in2="blurred" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+    </svg>
+</div>  
+
+
+<div class="modal fade contact-modal" id="contactModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content glass p-4 rounded-4 border-0 shadow-lg">
+      <div class="modal-header border-0 flex-column align-items-center position-relative">
+        <button type="button"
+                class="btn-close btn-close-white position-absolute end-0 top-0 me-2 mt-2"
+                data-bs-dismiss="modal" aria-label="Close"></button>
+
+        <img src="assets/capt1.png" alt="CAPT logo" class="modal-logo mb-2">
+
+        <h5 class="modal-title fw-bold text-center w-100">Let’s Work Together 🚀</h5>
+      </div>
+      <div class="modal-body">
+        <form id="contactForm" class="vstack gap-3" action="https://formspree.io/f/xblzakpd" method="POST">
+          <input type="hidden" name="_next" value="index.html#home">
+          
+          <input type="text" name="name" class="form-control glass" placeholder="Full Name" required>
+          <input type="email" name="email" class="form-control glass" placeholder="Email Address" required>
+          <input type="text" name="company" class="form-control glass" placeholder="Company / Brand (Optional)">
+          <select class="form-select glass" id="service" name="service" required>
+            <option value="" selected disabled hidden>Service Interested In</option>
+            <option>Video Editing</option>
+            <option>Graphic Design</option>
+            <option>Facebook Ads</option>
+            <option>UGC Content</option>
+            <option>Web Development</option>
+            <option>Game Development</option>
+            <option>Other</option>
+          </select>
+          <select class="form-select glass" name="budget">
+            <option selected disabled>Budget Range (Optional)</option>
+            <option>&lt; $500</option>
+            <option>$500 – $1,500</option>
+            <option>$1,500 – $5,000</option>
+            <option>&gt; $5,000</option>
+          </select>
+          <textarea class="form-control glass" name="message" rows="3" placeholder="Tell us about your project..."></textarea>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="consent" value="agreed" id="consentCheck" required>
+            <label class="form-check-label small" for="consentCheck">
+              I agree to be contacted by CAPT Studio regarding my inquiry.
+            </label>
+          </div>
+          <button type="submit" class="btn btn-warning w-100 fw-bold rounded-pill">Submit</button>
+          
+          <div id="contactFormStatus" class="text-center mt-2"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade pmodal" id="projectsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content pmodal-content border-0">
+        <div class="modal-header pmodal-header border-0">
+          <h5 class="modal-title fw-bold" id="pmTitle">Projects</h5>
+          <button type="button" class="btn-close btn-close-white pmodal-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body pmodal-body">
+          <div class="pmodal-filters d-flex flex-wrap gap-2 align-items-center">
+            <div id="pmChips" class="d-flex flex-wrap gap-2"></div>
+            <div class="ms-auto pmodal-search-wrap">
+              <input id="pmSearch" class="form-control form-control-sm pmodal-search" placeholder="Search…">
+            </div>
+          </div>
+
+          <div id="pmGrid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3 mt-3"></div>
+
+          <div id="pmEmpty" class="text-center py-5 d-none opacity-75">
+            No items match your filters. Clear search or change category.
+          </div>
+        </div>
+
+        <div class="modal-footer pmodal-footer border-0 small opacity-75">
+          <span id="pmCount"></span>
+          <div class="ms-auto d-none" id="pmActions">
+            <a id="pmOpenFolder" class="btn btn-outline-light btn-sm" target="_blank" rel="noopener">Open Drive folder</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="app.js"></script>
+<script src="projects.modal.js"></script>
+</body>
+
+</html>
