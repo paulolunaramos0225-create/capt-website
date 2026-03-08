@@ -15,7 +15,7 @@
   const pmActions = document.getElementById('pmActions');
   const pmOpenFolder = document.getElementById('pmOpenFolder');
 
-  const bsModal = new bootstrap.Modal(modalEl, { backdrop: true, focus: true });
+  const bsModal = new bootstrap.Modal(modalEl, { backdrop: true, focus: true }); 
 
   const state = { key: null, cat: 'All', q: '' };
   const projectCache = {}; // Cache to store fetched project data
@@ -23,12 +23,12 @@
   // This map connects your project card keys to Google Drive Folder IDs
   // Replace these with your actual Folder IDs from Part 1
   const FOLDER_ID_MAP = {
-    'video-editing': 'YOUR_VIDEO_EDITING_FOLDER_ID_HERE',
-    'graphic-design': 'YOUR_GRAPHIC_DESIGN_FOLDER_ID_HERE',
-    'facebook-ads': 'YOUR_FACEBOOK_ADS_FOLDER_ID_HERE',
-    'ugc': 'YOUR_UGC_FOLDER_ID_HERE',
-    'web-development': 'YOUR_WEB_DEV_FOLDER_ID_HERE',
-    'game-development': 'YOUR_GAME_DEV_FOLDER_ID_HERE',
+    'video-editing': '1w-Wmo4a5DCPigBNBWmhoBQ1ErB0k4eBz',
+    'graphic-design': '1bbLJtDv6jUpr_zYZG6JoOniDPYJIz0H6',
+    'facebook-ads': '1wjqWh4Dh1rD4mtH2ezxQghY8q4Tfizv1',
+    'ugc': '1QPpWxe-FROPGMdUwMdpcBCxVwiGfLegv',
+    'web-development': '1UVKbv_6SSz9y1sMvlrBEamdFpCxJaiSG',
+    'game-development': '18KRD7DBYe_v7h-e4YAYt5dars5Fn_FSW',
   };
 
   // Support deep-linking on initial load (no changes needed here)
@@ -99,9 +99,9 @@
               <img loading="lazy" src="${it.thumb}" alt="${it.title}" class="w-100 h-100 object-fit-cover"
                    onerror="this.onerror=null;this.src='assets/thumbs/fallback.webp';">
             </div>
-            <div class="card-body px-3">
+            <div class="card-body px-3" ">
               <div class="d-flex justify-content-between align-items-center">
-                <h6 class="m-0 text-white">${it.title || ''}</h6>
+                <h6 class="m-0 text-white pm-title">${it.title || ''}</h6>
                 <span class="badge">${it.cat || ''}</span>
               </div>
             </div>

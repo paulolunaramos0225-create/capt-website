@@ -23,9 +23,9 @@
 })();
 
 /* =========
-   Animate-on-view logic:
-   - Enables IntersectionObserver ONLY on ≥992px
-   - On <992px: disables the observer, forces elements to "shown" state and removes transitions so nothing animates.
+    Animate-on-view logic:
+    - Enables IntersectionObserver ONLY on ≥992px
+    - On <992px: disables the observer, forces elements to "shown" state and removes transitions so nothing animates.
 ========= */
 (function () {
   var mqLG = window.matchMedia('(min-width: 992px)');
@@ -37,8 +37,8 @@
     if (io) return;
     // Remove any inline transition disabling from mobile state
     animated.forEach(function (el) {
-      el.classList.remove('show');      // let IO drive it
-      el.style.transition = '';         // restore CSS-defined transitions
+      el.classList.remove('show');     // let IO drive it
+      el.style.transition = '';        // restore CSS-defined transitions
     });
 
     io = new IntersectionObserver(function (entries) {
@@ -64,9 +64,9 @@
   }
 
   function apply(e) {
-    if (e.matches) {     // ≥992px
+    if (e.matches) {      // ≥992px
       enableIO();
-    } else {             // <992px
+    } else {              // <992px
       disableIO();
     }
   }
@@ -89,6 +89,8 @@
   }, { passive: false });
 })();
 
+// ... (previous code) ...
+
 // TEAM — Toggle between Co-Founders and Core Team with animations
 (function () {
   // --- Data for the teams ---
@@ -100,13 +102,12 @@
     { name: 'Ivan Tuazon', imgSrc: 'assets/TUAZON.png' },
   ];
 
-  // *** THIS SECTION HAS BEEN UPDATED WITH UNIQUE DATA ***
   const coreTeam = [
     { name: 'Rainiel Paz', imgSrc: 'assets/PAZ.png' },
     { name: 'Mark Quicay', imgSrc: 'assets/QUICAY.png' },
     { name: 'Namiel Paz', imgSrc: 'assets/PAZM.png' },
-    { name: 'Priya Patel', imgSrc: 'assets/PATEL.png' },
-    { name: 'Kenji Tanaka', imgSrc: 'assets/TANAKA.png' },
+    { name: 'Marc Cahayon', imgSrc: 'assets/marc.png' },
+    { name: 'Ichan Remigio', imgSrc: 'assets/ichac.png' },
   ];
   // --- End of Data ---
 
@@ -120,28 +121,50 @@
   const mobileMembers = document.querySelectorAll('#teamCarousel .carousel-item');
   const allTeamMembers = [...desktopMembers, ...mobileMembers];
 
+  // Function to preload a single image and return a Promise
+  function preloadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = (e) => reject(e);
+      img.src = src;
+    });
+  }
+
+  // Modified updateTeamView to return a promise when all images are loaded
   function updateTeamView(teamData) {
-    // Update desktop view
+    const imagePreloadPromises = [];
+
     desktopMembers.forEach((member, index) => {
       const data = teamData[index] || { name: 'Member', imgSrc: 'assets/phd.jpg' };
       const img = member.querySelector('.member-photo');
       const nameMeta = member.querySelector('.member-meta .name');
       const nameSpotlight = member.querySelector('.spot-name');
       const figure = member.querySelector('.member-card');
-      if (img) img.src = data.imgSrc;
+      
+      if (img && img.src !== data.imgSrc) { // Only update if image source actually changes
+          imagePreloadPromises.push(preloadImage(data.imgSrc));
+          img.src = data.imgSrc; // Update src, the preload promise will ensure it's ready
+      }
       if (nameMeta) nameMeta.textContent = data.name;
       if (nameSpotlight) nameSpotlight.textContent = data.name;
       if (figure) figure.setAttribute('aria-label', data.name);
     });
 
-    // Update mobile view
     mobileMembers.forEach((member, index) => {
       const data = teamData[index] || { name: 'Member', imgSrc: 'assets/phd.jpg' };
       const img = member.querySelector('.media-34-img');
       const nameMeta = member.querySelector('.media-34-meta .name');
-      if (img) img.src = data.imgSrc;
+      
+      if (img && img.src !== data.imgSrc) { // Only update if image source actually changes
+          imagePreloadPromises.push(preloadImage(data.imgSrc));
+          img.src = data.imgSrc; // Update src
+      }
+      if (nameMeta) nameMeta.textContent = data.name;
       if (nameMeta) nameMeta.textContent = data.name;
     });
+
+    return Promise.all(imagePreloadPromises); // Return a promise that resolves when all images are loaded
   }
 
   toggleContainer.addEventListener('click', function(e) {
@@ -164,24 +187,39 @@
     });
 
     // 3. Wait for 'out' animation, then swap content and animate 'in'
+    // Now we wait for images to load *before* animating 'in'
     setTimeout(() => {
       const teamData = teamToShow === 'coreteam' ? coreTeam : coFounders;
-      updateTeamView(teamData);
+      
+      updateTeamView(teamData)
+        .then(() => { // This .then() fires only after all new images are loaded
+            allTeamMembers.forEach(member => {
+                member.classList.remove('animate-out');
+                member.classList.add('animate-in');
+            });
 
-      allTeamMembers.forEach(member => {
-        member.classList.remove('animate-out');
-        member.classList.add('animate-in');
-      });
+            // 4. Clean up 'in' class after animations finish
+            setTimeout(() => {
+                allTeamMembers.forEach(member => member.classList.remove('animate-in'));
+            }, 900); // This should match the total duration of your animate-in CSS
+        })
+        .catch(error => {
+            console.error("Error preloading images:", error);
+            // Fallback: If images fail to load, proceed with animation anyway
+            allTeamMembers.forEach(member => {
+                member.classList.remove('animate-out');
+                member.classList.add('animate-in');
+            });
+            setTimeout(() => {
+                allTeamMembers.forEach(member => member.classList.remove('animate-in'));
+            }, 900);
+        });
 
-      // 4. Clean up 'in' class after animations finish
-      // Longest delay (0.4s) + transition duration (0.5s)
-      setTimeout(() => {
-        allTeamMembers.forEach(member => member.classList.remove('animate-in'));
-      }, 900);
-
-    }, 400); // This should match the transition duration in the CSS
+    }, 400); // This should match the transition duration for 'animate-out' in your CSS
   });
 })();
+
+// ... (rest of your code) ...
 
 // ===== Logo Intro: mount/teardown (hardened) =====
 (function () {
@@ -243,7 +281,7 @@
   try {
     const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
     const isReload = nav ? nav.type === 'reload'
-                         : (performance.navigation && performance.navigation.type === 1); // legacy fallback
+                          : (performance.navigation && performance.navigation.type === 1); // legacy fallback
 
     if (isReload && location.hash && /^#projects\/.+/i.test(location.hash)) {
       // keep plain #projects (so page anchors still work) or remove hash entirely if you prefer
@@ -336,5 +374,8 @@
   
   form.addEventListener("submit", handleSubmit);
 })();
+
+
+
 
 

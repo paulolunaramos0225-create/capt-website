@@ -3,3 +3,16 @@ google-credentials.json
 
 # Node.js dependencies
 node_modules/
+
+# .gitignore
+
+# Node modules
+node_modules
+
+# Environment variables
+.env
+
+# Private credentials
+.private/
+*.json
+.vercel
