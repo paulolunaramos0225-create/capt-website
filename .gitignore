@@ -16,3 +16,4 @@ node_modules
 .private/
 *.json
 .vercel
+.env*.local

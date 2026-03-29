@@ -2,6 +2,7 @@
 // FINAL VERSION - Correctly handles Vercel environment variables
 
 const { google } = require('googleapis');
+const fs = require('fs');
 
 module.exports = async (req, res) => {
   // Set CORS headers
@@ -15,17 +16,26 @@ module.exports = async (req, res) => {
   }
 
   try {
-    // --- START OF THE FIX ---
-    // Vercel stores the entire JSON key as a string in the environment variable.
-    // We need to parse it into a JavaScript object.
-    const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+    const rawCredentials = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+    const credentialsPath = process.env.GOOGLE_APPLICATION_CREDENTIALS_PATH;
+
+    let credentials = null;
+    if (rawCredentials && rawCredentials !== 'undefined' && rawCredentials !== 'null') {
+      credentials = JSON.parse(rawCredentials);
+    } else if (credentialsPath) {
+      const fileContents = fs.readFileSync(credentialsPath, 'utf8');
+      credentials = JSON.parse(fileContents);
+    } else {
+      return res.status(500).json({
+        error: 'Missing Google credentials. Set GOOGLE_APPLICATION_CREDENTIALS (JSON string) or GOOGLE_APPLICATION_CREDENTIALS_PATH (file path).'
+      });
+    }
 
     // Authenticate by passing the credentials object directly.
     const auth = new google.auth.GoogleAuth({
-      credentials, // Use the parsed credentials object
+      credentials,
       scopes: ['https://www.googleapis.com/auth/drive.readonly'],
     });
-    // --- END OF THE FIX ---
 
     const drive = google.drive({ version: 'v3', auth });
 
@@ -37,7 +47,26 @@ module.exports = async (req, res) => {
 
     const subfolders = subfoldersRes.data.files;
     if (!subfolders || subfolders.length === 0) {
-      return res.status(200).json({ title: 'Projects', categories: [], items: [] });
+      const filesRes = await drive.files.list({
+        q: `'${folderId}' in parents and mimeType != 'application/vnd.google-apps.folder'`,
+        fields: 'files(id, name, thumbnailLink, webViewLink)',
+        orderBy: 'createdTime desc',
+        pageSize: 200,
+      });
+
+      const items = (filesRes.data.files || []).map(file => ({
+        title: file.name.replace(/\.[^/.]+$/, ''),
+        thumb: `https://lh3.googleusercontent.com/d/${file.id}=w1024`,
+        drive: file.webViewLink,
+        cat: 'All',
+      }));
+
+      return res.status(200).json({
+        title: 'Projects',
+        driveFolder: `https://drive.google.com/drive/folders/${folderId}`,
+        categories: ['All'],
+        items,
+      });
     }
 
     // For each subfolder, create a promise to fetch its files

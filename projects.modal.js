@@ -1,6 +1,4 @@
 // Filename: projects.modal.js
-// This is the UPDATED version of your frontend script.
-// Note the change in the `openProjects` function.
 
 (function () {
   const modalEl = document.getElementById('projectsModal');
@@ -15,23 +13,65 @@
   const pmActions = document.getElementById('pmActions');
   const pmOpenFolder = document.getElementById('pmOpenFolder');
 
-  const bsModal = new bootstrap.Modal(modalEl, { backdrop: true, focus: true }); 
+  const bsModal = new bootstrap.Modal(modalEl, { backdrop: true, focus: true });
 
   const state = { key: null, cat: 'All', q: '' };
-  const projectCache = {}; // Cache to store fetched project data
+  const projectCache = {}; 
 
-  // This map connects your project card keys to Google Drive Folder IDs
-  // Replace these with your actual Folder IDs from Part 1
+  // Updated All Folder IDs to match the main app
+  const SHORT_FORM_FOLDER_ID = '1VJwTL0gX1G9V3TLiYWeq8w7NPLgVgk-O';
+  const LONG_FORM_FOLDER_ID = '16bIMGsWTvAzhZ8N5JXczJx6WAAky5Nu3';
+  const GRAPHIC_DESIGN_FOLDER_ID = '1bbLJtDv6jUpr_zYZG6JoOniDPYJIz0H6'; 
+  const UGC_FB_ADS_FOLDER_ID = '1y3QcWjAXFllKIXia50PcZk-q_BBvdhJX';
+  const DEFAULT_VIDEO_FOLDER_ID = '1w-Wmo4a5DCPigBNBWmhoBQ1ErB0k4eBz'; // Fallback
+  
   const FOLDER_ID_MAP = {
-    'video-editing': '1w-Wmo4a5DCPigBNBWmhoBQ1ErB0k4eBz',
-    'graphic-design': '1bbLJtDv6jUpr_zYZG6JoOniDPYJIz0H6',
-    'facebook-ads': '1wjqWh4Dh1rD4mtH2ezxQghY8q4Tfizv1',
-    'ugc': '1QPpWxe-FROPGMdUwMdpcBCxVwiGfLegv',
-    'web-development': '1UVKbv_6SSz9y1sMvlrBEamdFpCxJaiSG',
-    'game-development': '18KRD7DBYe_v7h-e4YAYt5dars5Fn_FSW',
+    'video-editing': SHORT_FORM_FOLDER_ID, // Opens short form edits
+    'graphic-design': GRAPHIC_DESIGN_FOLDER_ID,
+    'facebook-ads': UGC_FB_ADS_FOLDER_ID,
+    'ugc': UGC_FB_ADS_FOLDER_ID,
+    'web-development': DEFAULT_VIDEO_FOLDER_ID,
+    'game-development': DEFAULT_VIDEO_FOLDER_ID,
   };
 
-  // Support deep-linking on initial load (no changes needed here)
+  function getProjectsApiCandidates() {
+    const candidates = ['/api/getProjects'];
+    if (!window.location.origin.includes('localhost:3000')) {
+      candidates.push('http://localhost:3000/api/getProjects');
+    }
+    return Array.from(new Set(candidates));
+  }
+
+  async function fetchProjectsPayload(folderId) {
+    const endpoints = getProjectsApiCandidates();
+    let lastError = null;
+
+    for (let i = 0; i < endpoints.length; i += 1) {
+      const endpoint = endpoints[i];
+      try {
+        const response = await fetch(`${endpoint}?folderId=${encodeURIComponent(folderId)}`);
+        const raw = await response.text();
+        let payload = null;
+        try {
+          payload = raw ? JSON.parse(raw) : {};
+        } catch (e) {
+          payload = null;
+        }
+
+        if (!response.ok) {
+          const msg = payload && payload.error ? payload.error : `HTTP ${response.status}`;
+          throw new Error(msg);
+        }
+
+        return payload || {};
+      } catch (error) {
+        lastError = error;
+      }
+    }
+
+    throw lastError || new Error('Projects API unavailable');
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     const m = location.hash.match(/^#projects\/([^?]+)(?:\?cat=([^&]+))?/);
     if (m) {
@@ -56,9 +96,20 @@
   }
 
   function buildChips() {
-    const { categories = [] } = getData();
+    const data = getData();
+    const items = data.items || [];
+    
+    // Automatically extract categories from the data, just like the main page!
+    let cats = data.categories || [];
+    if (!cats.length) {
+      const uniqueCats = [...new Set(items.map(it => it.cat).filter(Boolean))];
+      if (uniqueCats.length > 0) {
+        cats = ['All', ...uniqueCats];
+      }
+    }
+
     pmChips.innerHTML = '';
-    categories.forEach(cat => {
+    cats.forEach(cat => {
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'chip btn btn-sm' + (cat === state.cat ? ' active' : '');
@@ -72,6 +123,7 @@
     const { items = [] } = getData();
     const q = state.q.trim().toLowerCase();
     return items.filter(it => {
+      // Filtering strictly based on folder property
       const inCat = (state.cat === 'All') || (it.cat === state.cat);
       const inQ = !q || (it.title && it.title.toLowerCase().includes(q));
       return inCat && inQ;
@@ -89,20 +141,30 @@
     pmEmpty.classList.add('d-none');
     pmCount.textContent = `${list.length} item${list.length > 1 ? 's' : ''}`;
 
+    // Use Padding-Bottom Trick for perfect heights
+    let padRatio = '56.25%'; // 16:9 Default
+    if (['shortform', 'ugcfbads', 'video-editing', 'facebook-ads', 'ugc'].includes(state.key)) {
+      padRatio = '177.77%'; // Shorts, UGC, FB (9:16)
+    } else if (['longform'].includes(state.key)) {
+      padRatio = '56.25%'; // Long form (16:9)
+    } else if (['graphicdesigns', 'graphic-design'].includes(state.key)) {
+      padRatio = '125%'; // Graphic Design / IG Posts (4:5)
+    }
+
     list.forEach(it => {
       const col = document.createElement('div');
       col.className = 'col';
       col.innerHTML = `
-        <a href="${it.drive}" target="_blank" rel="noopener" class="card-link">
+        <a href="${it.drive}" target="_blank" rel="noopener" class="card-link h-100">
           <article class="card bg-transparent border-0 h-100">
-            <div class="ratio ratio-16x9 rounded overflow-hidden">
+            <div class="pm-thumb-wrap" style="padding-bottom: ${padRatio};">
               <img loading="lazy" src="${it.thumb}" alt="${it.title}" class="w-100 h-100 object-fit-cover"
                    onerror="this.onerror=null;this.src='assets/thumbs/fallback.webp';">
             </div>
-            <div class="card-body px-3" ">
+            <div class="card-body px-3">
               <div class="d-flex justify-content-between align-items-center">
                 <h6 class="m-0 text-white pm-title">${it.title || ''}</h6>
-                <span class="badge">${it.cat || ''}</span>
+                <span class="badge pm-badge">${it.cat || ''}</span>
               </div>
             </div>
           </article>
@@ -117,7 +179,7 @@
     history.replaceState(null, '', base + q);
   }
 
-  // ---------- OPEN & LOAD (THIS IS THE MODIFIED PART) ----------
+  // ---------- OPEN & LOAD ----------
   async function openProjects(key, catOpt) {
     state.key = key;
     state.cat = catOpt || 'All';
@@ -129,21 +191,12 @@
     pmChips.innerHTML = '';
     bsModal.show();
 
-    // Check cache first. If data isn't there, fetch it from our new API endpoint.
     if (!projectCache[key]) {
       try {
         const folderId = FOLDER_ID_MAP[key];
         if (!folderId) throw new Error(`No folder ID mapped for project key: ${key}`);
         
-        // *** CHANGE IS HERE ***
-        // Instead of fetching a local JSON file, we fetch from our serverless function.
-        const response = await fetch(`/api/getProjects?folderId=${folderId}`);
-        // *** END OF CHANGE ***
-
-        if (!response.ok) {
-          throw new Error(`Could not load data for ${key}.`);
-        }
-        projectCache[key] = await response.json();
+        projectCache[key] = await fetchProjectsPayload(folderId);
       } catch (error) {
         console.error('Failed to fetch project data:', error);
         pmTitle.textContent = 'Error loading projects';
@@ -159,7 +212,7 @@
     updateHash();
   }
 
-  // ---------- EVENTS (NO CHANGES) ----------
+  // ---------- EVENTS ----------
   pmChips.addEventListener('click', (e) => {
     const b = e.target.closest('.chip');
     if (!b) return;
