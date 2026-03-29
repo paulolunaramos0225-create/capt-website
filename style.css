@@ -2,7 +2,7 @@
    Base + Variables
 ========================= */
 :root { 
-  --nav-h: 0px;                 /* reserved variable for anchor offsets */
+  --nav-h: 88px;                /* reserved variable for anchor offsets */
   --section-bg: #051850;
   /* liquid-glass tunables (for the navbar ONLY) */
   --lg-tint-color: 255,255,255; /* white tint */
@@ -70,6 +70,7 @@ body::after{
 
 /* === Mobile collapsed nav: center menu + align CTA width === */
 @media (max-width: 991.98px){
+  :root{ --nav-h: 72px; }
   .mobile-nav-sheet{
     display:flex;
     flex-direction:column;
@@ -89,6 +90,12 @@ body::after{
   }
   .mobile-cta {
     background-color: rgba(0, 0, 0, 0.25) !important; 
+  }
+
+  .section-1{
+    align-items: flex-start;
+    padding-top: calc(var(--nav-h) + 16px);
+    padding-bottom: 28px;
   }
 }
 
@@ -293,8 +300,8 @@ body::after{
   min-height: 76svh !important;
   display: flex;
   justify-content: center;
-  align-items: flex-end; 
-  padding: 0 0 0 0 !important; 
+  align-items: center;
+  padding: clamp(24px, 6vh, 72px) 0 clamp(16px, 3.5vh, 42px) !important;
   margin-bottom: 0 !important;
 }
 .section-1::before{
@@ -365,7 +372,7 @@ body::after{
   justify-content: center;
   align-items: center;
   gap: clamp(14px, 2vh, 20px);
-  padding: clamp(60px, 9vh, 110px) 24px clamp(6px, 1.5vh, 14px);
+  padding: clamp(7.5px, 9vh, 17.5px) 24px clamp(6px, 1.5vh, 14px);
 }
 
 .hero-content{
@@ -533,7 +540,8 @@ body::after{
   width: 100%;
   display: block;
   position: relative;
-  padding-block: clamp(16px, 3.8vh, 36px) !important;
+  padding-block: clamp(12px, 3.2vh, 28px) !important;
+  margin-top: calc(-1 * clamp(18px, 4.5vh, 56px));
 }
 .clients-inner{
   width: 100%;
@@ -1790,6 +1798,27 @@ body::after{
   color: rgb(5, 33, 109);
 }
 
+@media (max-width: 640px){
+  .team-toggle-buttons{
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .team-toggle-buttons::before{
+    display: none;
+  }
+  .team-toggle-buttons .btn-toggle{
+    flex: 0 0 auto;
+    padding: 8px 14px;
+  }
+  .team-toggle-buttons .btn-toggle.active{
+    background: #b0f414;
+    color: rgb(5, 33, 109);
+  }
+}
+
 /* Rail/cards (unchanged except centering behavior is now from wrapper) */
 #team.section-5 .team-rail{ display:flex; gap:clamp(10px,2vw,20px); align-items:stretch; }
 #team.section-5 .member{ 
@@ -2498,6 +2527,19 @@ body::after{
 }
 .modal-backdrop.show::before {
   display: none;
+}
+
+/* Ensure modal stays clickable above overlays */
+.modal{
+  z-index: 1065;
+  pointer-events: auto;
+}
+.modal-dialog,
+.modal-content{
+  pointer-events: auto;
+}
+.modal-backdrop{
+  z-index: 1060;
 }
 
 /* Make the select field itself match the glass theme */
