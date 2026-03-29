@@ -102,7 +102,7 @@ body::after{
 /* =========================
    Header / Navigation
 ========================= */
-.head-nav-container{ height: var(--nav-h); background: transparent; }
+.head-nav-container{ height: 0; background: transparent; }
 
 .site-header{
   position: fixed; top: 0; left: 0; right: 0; width: 100%;
@@ -503,7 +503,7 @@ body::after{
     
     /* We don't need a full 100vh if the image is scaling down */
     min-height: 70svh !important; 
-    padding: 0 0 clamp(18px, 5vh, 40px) 0 !important;
+    padding: 90px 0 clamp(18px, 5vh, 40px) 0 !important;
   }
 }
 
@@ -1783,11 +1783,15 @@ body::after{
   border: none;
   color: white;
   border-radius: 50px;
-  padding: 8px 14px;
+  padding: 8px 6px; /* Slightly reduced horizontal padding */
   font-weight: 700;
-  font-size: clamp(.86rem, .8rem + .3vw, 1rem);
+  font-size: clamp(.75rem, .7rem + .3vw, 1rem); /* Slightly smaller base font */
   text-align: center;
-  white-space: nowrap;
+  white-space: normal; /* Allows text to break to a second line */
+  line-height: 1.1; /* Keeps wrapped text tightly packed */
+  display: flex; /* Centers the wrapped text vertically */
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   position: relative;
   z-index: 1;
@@ -1798,26 +1802,6 @@ body::after{
   color: rgb(5, 33, 109);
 }
 
-@media (max-width: 640px){
-  .team-toggle-buttons{
-    display: flex;
-    gap: 8px;
-    padding: 8px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .team-toggle-buttons::before{
-    display: none;
-  }
-  .team-toggle-buttons .btn-toggle{
-    flex: 0 0 auto;
-    padding: 8px 14px;
-  }
-  .team-toggle-buttons .btn-toggle.active{
-    background: #b0f414;
-    color: rgb(5, 33, 109);
-  }
-}
 
 /* Rail/cards (unchanged except centering behavior is now from wrapper) */
 #team.section-5 .team-rail{ display:flex; gap:clamp(10px,2vw,20px); align-items:stretch; }
